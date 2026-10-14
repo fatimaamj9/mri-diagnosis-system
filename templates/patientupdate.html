@@ -1,0 +1,82 @@
+{% extends "doctor_base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='add_patient.css') }}"
+>
+{% endblock %}
+
+{% block page_content %}
+
+<main class="add-patient-page">
+    <section class="add-patient-card">
+        <h1 class="add-patient-heading">
+            Update Patient Details
+        </h1>
+
+        <p class="add-patient-description">
+            Update {{ patient.fName }} {{ patient.lName }}'s information below.
+        </p>
+
+        <form class="add-patient-form" method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="update-form-grid">
+                <div class="form-group">
+                    {{ form.fname.label }}
+                    {{ form.fname(class="form-control") }}
+                    {% for error in form.fname.errors %}
+                        <p class="add-patient-errors">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.lname.label }}
+                    {{ form.lname(class="form-control") }}
+                    {% for error in form.lname.errors %}
+                        <p class="add-patient-errors">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.dbirth.label }}
+                    {{ form.dbirth(class="form-control") }}
+                    {% for error in form.dbirth.errors %}
+                        <p class="add-patient-errors">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.patientEmail.label }}
+                    {{ form.patientEmail(class="form-control", placeholder="patient@example.com") }}
+                    {% for error in form.patientEmail.errors %}
+                        <p class="add-patient-errors">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group full-width">
+                    {{ form.diagnosis.label }}
+                    {{ form.diagnosis(class="form-control") }}
+                    {% for error in form.diagnosis.errors %}
+                        <p class="add-patient-errors">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="update-patient-actions">
+                <button type="submit" class="add-patient-submit">
+                    Save Changes
+                </button>
+
+                <a class="update-patient-cancel"
+                   href="{{ url_for('patientlist', doctor_id=user.id) }}">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </section>
+</main>
+
+{% endblock %}

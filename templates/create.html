@@ -1,0 +1,75 @@
+
+{% extends "doctor_base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_title %}Add a New Patient{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='add_patient.css') }}"
+>
+{% endblock %}
+
+{% block page_content %}
+<main class="add-patient-page">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="add-patient-flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}" role="alert">
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <section class="add-patient-card">
+        <h1 class="add-patient-heading">Add a New Patient</h1>
+
+        <p class="add-patient-description">
+            Enter the patient's information below to create a new record.
+        </p>
+
+        <form class="add-patient-form"
+              method="POST"
+              action="{{ url_for('create', doctor_id=user.id) }}">
+
+            {{ form.hidden_tag() }}
+
+            {{ wtf.form_field(form.fName) }}
+            {{ wtf.form_field(form.lName) }}
+            {{ wtf.form_field(form.patientEmail) }}
+            {{ wtf.form_field(form.dbirth) }}
+
+            <fieldset class="add-patient-gender">
+                <legend>Gender</legend>
+
+                {% for subfield in form.sex %}
+                    <label class="radio-option">
+                        {{ subfield }}
+                        <span>{{ subfield.label.text }}</span>
+                    </label>
+                {% endfor %}
+
+                {% if form.sex.errors %}
+                    <ul class="add-patient-errors">
+                        {% for error in form.sex.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </fieldset>
+
+            {{ wtf.form_field(form.diagnosis) }}
+
+            <button class="add-patient-submit" type="submit">
+                Add Patient
+            </button>
+        </form>
+    </section>
+
+</main>
+{% endblock %}

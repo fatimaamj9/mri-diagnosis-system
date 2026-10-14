@@ -1,0 +1,39 @@
+
+# Uploaded images
+uploads/*.jpg
+uploads/*.png
+uploads/*.jpeg
+uploads/*.JPG
+uploads/*.JPEG
+uploads/*.PNG
+
+
+# Secrets
+.env
+
+# Python environments and cache
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Local database and uploaded data
+database.db
+*.sqlite
+*.sqlite3
+uploads/
+
+# Flask session files
+flask_session/
+
+# IDE settings
+.idea/
+.vscode/
+
+# Environment-specific files
+.env.*
+!.env.example
+
+# Trained model (it exceeds GitHub's file limit)
+models/MSStrokeModelBestt.h5
+

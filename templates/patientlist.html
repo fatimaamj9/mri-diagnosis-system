@@ -1,0 +1,334 @@
+
+{% extends "doctor_base.html" %}
+
+{% block page_title %}Patients List{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='patientlist.css') }}"
+>
+{% endblock %}
+
+{% block page_content %}
+
+<main class="patient-list-page">
+
+    <div class="patient-list-header">
+        <div>
+            <h1>Patient Management</h1>
+            <p class="patient-list-subtitle">
+                View and manage registered patient records.
+            </p>
+        </div>
+
+        <div class="patient-list-actions">
+            <input
+                type="search"
+                id="patientSearch"
+                class="patient-search"
+                placeholder="Search patients..."
+                aria-label="Search patients">
+
+            <a class="patient-add-button"
+               href="{{ url_for('create', doctor_id=user.id) }}">
+                + Add Patient
+            </a>
+        </div>
+    </div>
+
+    <section class="patient-list-card">
+        <div class="patient-list-card-header">
+            <h2>Patient Records</h2>
+            <p>Patient information and available actions</p>
+        </div>
+
+        <div class="patient-table-wrapper">
+            <table class="patient-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Patient Name</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Diagnosis</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="patientTableBody">
+                    {% for patient in user.patients %}
+                    <tr class="patient-row">
+                        <td class="patient-id">{{ patient.id }}</td>
+
+                        <td class="patient-name">
+                            {{ patient.fName }} {{ patient.lName }}
+                        </td>
+
+                        <td>{{ patient.patientEmail }}</td>
+                        <td>{{ patient.sex }}</td>
+
+                        <td>
+                            <span class="patient-diagnosis">
+                                {{ patient.diagnosis or 'Not diagnosed' }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="patient-row-actions">
+                                <a href="{{ url_for(
+                                    'patientupdate',
+                                    id=patient.id,
+                                    doctor_id=user.id
+                                ) }}">Update</a>
+
+                                <a href="{{ url_for(
+                                    'mainpage',
+                                    id=patient.id,
+                                    doctor_id=user.id
+                                ) }}">Diagnose</a>
+                                <button
+                                    type="button"
+                                    class="patient-send-diagnosis"
+                                    data-patient-id="{{ patient.id }}"
+                                    data-doctor-id="{{ user.id }}"
+                                >
+                                    Send Diagnosis
+                                </button>
+
+                                <form method="POST"
+                                      action="{{ url_for(
+                                          'delete',
+                                          id=patient.id,
+                                          doctor_id=user.id
+                                      ) }}"
+                                      onsubmit="return confirm(
+                                          'Are you sure you want to delete this entry?'
+                                      );">
+                                    <button type="submit"
+                                            class="patient-delete">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="patient-empty">
+                            No patients have been added yet.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+<!-- Send Diagnosis Modal -->
+<div id="diagnosisEmailModal" class="diagnosis-modal" aria-hidden="true">
+    <div class="diagnosis-modal-content"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="diagnosisModalTitle">
+
+        <div class="diagnosis-modal-header">
+            <h2 id="diagnosisModalTitle">Send Diagnosis</h2>
+            <button type="button"
+                    id="closeDiagnosisModal"
+                    class="diagnosis-modal-close"
+                    aria-label="Close modal">
+                &times;
+            </button>
+        </div>
+
+        <p>
+            Review the details below before sending the email to the patient.
+        </p>
+
+        <form id="diagnosisEmailForm" method="POST">
+            <input type="hidden" id="emailPatientId" name="patient_id">
+
+            <div class="diagnosis-form-group">
+                <label for="emailPatientName">Patient</label>
+                <input type="text"
+                       id="emailPatientName"
+                       readonly>
+            </div>
+
+            <div class="diagnosis-form-group">
+                <label for="emailRecipient">Recipient Email</label>
+                <input type="email"
+                       id="emailRecipient"
+                       name="recipient"
+                       required>
+            </div>
+
+            <div class="diagnosis-form-group">
+                <label for="emailDiagnosis">Diagnosis Result</label>
+                <input type="text"
+                       id="emailDiagnosis"
+                       name="diagnosis"
+                       required>
+            </div>
+
+            <div id="diagnosisEmailError"
+                 class="diagnosis-email-error"
+                 role="alert"></div>
+
+            <div class="diagnosis-modal-actions">
+                <button type="button"
+                        id="cancelDiagnosisEmail"
+                        class="diagnosis-cancel-btn">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        id="sendDiagnosisEmailBtn"
+                        class="diagnosis-send-btn">
+                    Send Email
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+            </table>
+        </div>
+
+        <div class="patient-list-footer">
+            <span id="patientCount">
+                {{ user.patients|length }} patient(s)
+            </span>
+        </div>
+    </section>
+
+</main>
+{% endblock %}
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("patientSearch");
+    const rows = Array.from(
+        document.querySelectorAll("#patientTableBody .patient-row")
+    );
+    const countLabel = document.getElementById("patientCount");
+
+    searchInput.addEventListener("input", function () {
+        const query = this.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        rows.forEach(function (row) {
+            const matches = row.textContent.toLowerCase().includes(query);
+            row.hidden = !matches;
+
+            if (matches) {
+                visibleCount++;
+            }
+        });
+
+        countLabel.textContent =
+            visibleCount + " patient(s)" +
+            (query ? " matching your search" : "");
+    });
+});
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('diagnosisEmailModal');
+    const form = document.getElementById('diagnosisEmailForm');
+    const closeBtn = document.getElementById('closeDiagnosisModal');
+    const cancelBtn = document.getElementById('cancelDiagnosisEmail');
+    const errorBox = document.getElementById('diagnosisEmailError');
+    const sendBtn = document.getElementById('sendDiagnosisEmailBtn');
+
+    const patientName = document.getElementById('emailPatientName');
+    const patientId = document.getElementById('emailPatientId');
+    const recipient = document.getElementById('emailRecipient');
+    const diagnosis = document.getElementById('emailDiagnosis');
+
+    function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        errorBox.textContent = '';
+    }
+
+    document.querySelectorAll('.patient-send-diagnosis').forEach(button => {
+        button.addEventListener('click', async function () {
+            const id = button.dataset.patientId;
+            const doctorId = button.dataset.doctorId;
+
+            errorBox.textContent = '';
+            patientName.value = 'Loading...';
+            recipient.value = '';
+            diagnosis.value = '';
+            patientId.value = id;
+
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Loading...';
+
+            try {
+                const url =
+                    `/${encodeURIComponent(id)}/${encodeURIComponent(doctorId)}/diagnosis-email-preview/`;
+
+                const response = await fetch(url, {
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                // Detect HTML responses (such as login pages or Flask errors)
+                // instead of producing "Unexpected token '<'".
+                const contentType = response.headers.get('content-type') || '';
+
+                if (!contentType.includes('application/json')) {
+                    throw new Error(
+                        `Expected JSON but received HTML or another response (HTTP ${response.status}). Check the Flask route, login session, and server logs.`
+                    );
+                }
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Could not load patient details.');
+                }
+
+                patientName.value = data.patient_name || '';
+                recipient.value = data.recipient || '';
+                diagnosis.value = data.diagnosis || '';
+
+                form.action =
+                    `/${encodeURIComponent(id)}/${encodeURIComponent(doctorId)}/send-diagnosis/`;
+
+            } catch (error) {
+                errorBox.textContent = error.message;
+            } finally {
+                sendBtn.disabled = false;
+                sendBtn.textContent = 'Send Email';
+            }
+        });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', event => {
+        if (event.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeModal();
+        }
+    });
+
+    form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            form.reportValidity();
+            return;
+        }
+
+        sendBtn.disabled = true;
+        sendBtn.textContent = 'Sending...';
+    });
+});
+</script>
+{% endblock %}

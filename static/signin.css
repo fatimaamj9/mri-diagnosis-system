@@ -1,0 +1,192 @@
+
+/* General page layout */
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    overflow-x: hidden;
+
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(13, 35, 65, 0.82),
+            rgba(22, 75, 112, 0.58)
+        ),
+        url("mri6.jpg") center / cover no-repeat fixed;
+}
+
+/* Login card */
+.rightboxlog {
+    width: 100%;
+    max-width: 440px;
+    min-height: 0;
+    height: auto;
+    margin: 0 auto;
+    padding: 40px;
+    box-sizing: border-box;
+
+    background: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.2);
+}
+
+/* Inner container */
+.boxlog {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Login form */
+.form-signin {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #253247;
+}
+
+.form-signin .form-signin-heading {
+    margin: 0 0 28px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: #17365d;
+}
+
+.form-signin .form-group {
+    margin-bottom: 20px;
+}
+
+.form-signin label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #344256;
+}
+
+.form-signin .form-control {
+    position: relative;
+    width: 100%;
+    height: 46px;
+    padding: 10px 13px;
+    box-sizing: border-box;
+
+    font-size: 15px;
+    color: #253247;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    box-shadow: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+    border-color: #2563a6;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 166, 0.14);
+}
+
+/* Submit button */
+.container-login100-form-btn {
+    width: 100%;
+    margin: 26px 0 0;
+    display: flex;
+    justify-content: center;
+}
+
+.login100-form-btn {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 8px;
+    background: #1f4e79;
+    color: #ffffff;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.login100-form-btn:hover {
+    background: #163b5d;
+}
+
+.login100-form-btn:focus-visible {
+    outline: 3px solid #80b7e8;
+    outline-offset: 3px;
+}
+
+/* Password recovery */
+.rightboxlog > div:last-child {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.rightboxlog a {
+    color: #1f4e79;
+    text-decoration: none;
+}
+
+.rightboxlog a:hover {
+    color: #163b5d;
+    text-decoration: underline;
+}
+
+/* Flash messages */
+.flashes {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto 16px;
+    padding: 0;
+    list-style: none;
+}
+
+.flashes > div {
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background: #fff0f0;
+    color: #a11b1b;
+    border: 1px solid #f0caca;
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+    body {
+        padding: 16px;
+        background-attachment: scroll;
+    }
+
+    .rightboxlog {
+        padding: 28px 22px;
+        border-radius: 12px;
+    }
+
+    .form-signin .form-signin-heading {
+        font-size: 25px;
+    }
+}

@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block page_title %}Patient Management{% endblock %}</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='doctor_base.css') }}"
+    >
+
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <header class="doctor-header">
+        <a
+            class="doctor-brand"
+            href="{{ url_for('patientlist', doctor_id=user.id) }}"
+        >
+            Multiple Sclerosis Diagnostic System
+        </a>
+
+        <span class="doctor-name">
+            Dr. {{ user.f_name }} {{ user.l_name }}
+        </span>
+
+        <div class="doctor-menu" id="menuToggle">
+            <input
+                type="checkbox"
+                aria-label="Toggle navigation menu"
+            >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+            <ul id="menu">
+                <li>
+                    <a href="{{ url_for('patientlist', doctor_id=user.id) }}">
+                        Patients List
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('create', doctor_id=user.id) }}">
+                        Add Patient
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('account', doctor_id=user.id) }}">
+                        Account
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('logout') }}">
+                        Log Out
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="doctor-flashes">
+                {% for category, message in messages %}
+                    <div class="doctor-flash {{ category }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main class="doctor-page">
+        {% block page_content %}{% endblock %}
+    </main>
+
+    {% block scripts %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+{% endblock %}
+</body>
+</html>

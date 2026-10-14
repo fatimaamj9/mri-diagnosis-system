@@ -1,0 +1,35 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+Multiple Sclerosis Diagnostic System
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='starter-template.css')}}">
+{% endblock %}
+
+{% block content %}
+
+
+</br>
+</br>
+</br>
+</br>
+<div class="mainbackground">
+      <!-- banner -->
+      <div id="banner">
+          <div class="container text-center text-md-left">
+              <h1 data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="display-3 font-weight-bold my-5 edittext">
+                Welcome to Multiple Sclerosis<br>
+                Diagnostic System
+              </h1>
+              <br>
+              <br>
+              <p>
+                  <a class="home-btn container-home-btn" href="{{ url_for('login') }}" style="margin-left:350pt;">Login</a>
+              </p>
+          </div>
+      </div>
+</div>
+    {% endblock %}

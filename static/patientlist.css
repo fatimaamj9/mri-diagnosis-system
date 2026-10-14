@@ -1,0 +1,599 @@
+
+
+/* Layout fixes for the patient list */
+html,
+body {
+    min-height: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Override the old Bootstrap container around the page */
+body > .content {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+body > .container {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Keep the header full-width */
+.topnavtt {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 56px;
+    box-sizing: border-box;
+}
+
+/* Remove the old MRI background from this page */
+body {
+    background: #f4f7fb !important;
+    background-image: none !important;
+}
+
+/* The page content follows the header */
+.patient-list-page {
+    display: block;
+    width: 100%;
+    min-height: calc(100vh - 56px);
+    margin: 0;
+    padding: 32px 28px 48px;
+    background: #f4f7fb;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .patient-list-page {
+        padding: 22px 14px;
+    }
+}
+
+/* Patient list page */
+.patient-list-page {
+    min-height: 100vh;
+    padding: 32px 24px 48px;
+    background: #f4f7fb;
+    color: #243247;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+.patient-list-page * {
+    box-sizing: border-box;
+}
+
+.patient-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.patient-list-header h1 {
+    margin: 0;
+    color: #17365d;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.patient-list-subtitle {
+    margin: 8px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.patient-list-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.patient-search {
+    width: 260px;
+    max-width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #d7e0ea;
+    border-radius: 8px;
+    background: #fff;
+    color: #243247;
+    font-size: 14px;
+}
+
+.patient-search:focus {
+    outline: 2px solid #b9d5f3;
+    border-color: #3975ad;
+}
+
+.patient-add-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 11px 16px;
+    border: 0;
+    border-radius: 8px;
+    background: #1f4e79;
+    color: #fff !important;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none !important;
+    white-space: nowrap;
+}
+
+.patient-add-button:hover {
+    background: #163b5d;
+}
+
+.patient-list-card {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(24, 49, 78, 0.05);
+}
+
+.patient-list-card-header {
+    padding: 20px 22px;
+    border-bottom: 1px solid #e8edf3;
+}
+
+.patient-list-card-header h2 {
+    margin: 0;
+    color: #243247;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.patient-list-card-header p {
+    margin: 6px 0 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.patient-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.patient-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.patient-table th {
+    padding: 14px 18px;
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.patient-table td {
+    padding: 17px 18px;
+    border-top: 1px solid #edf1f5;
+    color: #334155;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.patient-table tbody tr:hover {
+    background: #f8fbff;
+}
+
+.patient-id {
+    color: #64748b;
+    font-weight: 600;
+}
+
+.patient-name {
+    color: #17365d;
+    font-weight: 600;
+}
+
+.patient-diagnosis {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: #edf4fb;
+    color: #245a87;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.patient-row-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+}
+
+.patient-row-actions a,
+.patient-row-actions button {
+    display: inline-block;
+    padding: 7px 10px;
+    border: 1px solid #d5dfeb;
+    border-radius: 6px;
+    background: #fff;
+    color: #315a80;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.patient-row-actions a:hover,
+.patient-row-actions button:hover {
+    background: #edf4fb;
+}
+
+.patient-row-actions .patient-delete {
+    border-color: #f0caca;
+    color: #b42318;
+}
+
+.patient-row-actions .patient-delete:hover {
+    background: #fff1f0;
+}
+
+.patient-empty {
+    padding: 48px 20px !important;
+    text-align: center;
+    color: #64748b !important;
+}
+
+.patient-list-footer {
+    padding: 14px 20px;
+    border-top: 1px solid #e8edf3;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.patient-flashes {
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.patient-flashes li {
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border: 1px solid #f0caca;
+    border-radius: 8px;
+    background: #fff1f0;
+    color: #a11b1b;
+}
+
+@media (max-width: 768px) {
+    .patient-list-page {
+        padding: 24px 14px;
+    }
+
+    .patient-list-header {
+        align-items: stretch;
+    }
+
+    .patient-list-header h1 {
+        font-size: 24px;
+    }
+
+    .patient-list-actions {
+        width: 100%;
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .patient-search {
+        width: 100%;
+    }
+
+    .patient-add-button {
+        width: 100%;
+    }
+
+    .patient-table th,
+    .patient-table td {
+        padding: 12px;
+    }
+}
+
+.patient-topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 24px;
+    min-height: 56px;
+    background: #292929;
+}
+
+.patient-topnav .menuTitle {
+    padding: 0;
+    color: #fff;
+    font-size: 18px;
+}
+
+.patient-topnav > span {
+    margin-left: auto !important;
+    margin-right: 52px !important;
+    color: #fff;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .patient-topnav {
+        padding: 12px 14px;
+        flex-wrap: wrap;
+    }
+
+    .patient-topnav .menuTitle {
+        font-size: 14px;
+    }
+
+    .patient-topnav > span {
+        margin-right: 45px !important;
+        font-size: 12px;
+    }
+}
+
+
+
+/* Patient list header — single source of truth */
+header.patient-header {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    width: 100%;
+    min-height: 64px;
+    margin: 0;
+    padding: 12px 28px;
+    box-sizing: border-box;
+
+    background: #17365D !important;
+    background-image: none !important;
+    color: #fff !important;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header.patient-header .patient-brand {
+    display: inline-block;
+    flex-shrink: 0;
+    padding: 0;
+    color: #fff !important;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+header.patient-header .patient-doctor {
+    position: static !important;
+    display: inline-block;
+    flex-shrink: 0;
+    margin: 0 48px 0 auto !important;
+    color: #fff !important;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+header.patient-header #menuToggle.patient-menu-toggle {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    margin: 0;
+    padding: 0;
+}
+
+header.patient-header #menuToggle span {
+    background: #fff;
+}
+
+header.patient-header #menuToggle input:checked ~ span {
+    background: #232323;
+}
+
+@media (max-width: 600px) {
+    header.patient-header {
+        gap: 8px;
+        padding: 12px 14px;
+    }
+
+    header.patient-header .patient-brand {
+        max-width: 58%;
+        font-size: 13px;
+        line-height: 1.4;
+        white-space: normal;
+    }
+
+    header.patient-header .patient-doctor {
+        margin-right: 38px !important;
+        font-size: 11px;
+        white-space: normal;
+    }
+
+    header.patient-header #menuToggle.patient-menu-toggle {
+        right: 12px;
+    }
+}
+/* Match the shared application design */
+body {
+    background: #f4f7fb !important;
+    background-image: none !important;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #243247;
+}
+
+.patient-list-page {
+    width: 100%;
+    min-height: calc(100vh - 68px);
+    margin: 0;
+    padding: 36px 24px 56px;
+    box-sizing: border-box;
+    background: #f4f7fb;
+}
+
+.patient-doctor {
+    margin-left: auto;
+    margin-right: 65px;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .patient-list-page {
+        padding: 22px 12px 36px;
+    }
+
+    .patient-doctor {
+        display: none;
+    }
+}
+
+/* Diagnosis email modal */
+.diagnosis-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.55);
+    padding: 24px;
+    overflow-y: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.diagnosis-modal.is-open {
+    display: flex;
+}
+
+.diagnosis-modal-content {
+    background: #fff;
+    width: 100%;
+    max-width: 620px;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+    margin: auto;
+}
+
+.diagnosis-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.diagnosis-modal-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.diagnosis-modal-close {
+    border: none;
+    background: transparent;
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.diagnosis-form-group {
+    margin-top: 16px;
+}
+
+.diagnosis-form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.diagnosis-form-group input,
+.diagnosis-form-group textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font: inherit;
+}
+
+.diagnosis-form-group input:focus,
+.diagnosis-form-group textarea:focus {
+    outline: 2px solid #8bb8ee;
+    border-color: #3978c5;
+}
+
+.diagnosis-form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.diagnosis-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.diagnosis-cancel-btn,
+.diagnosis-send-btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font: inherit;
+}
+
+.diagnosis-cancel-btn {
+    background: #e9ecef;
+    color: #212529;
+}
+
+.diagnosis-send-btn {
+    background: #1769aa;
+    color: white;
+}
+
+.diagnosis-send-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.diagnosis-email-error {
+    color: #b42318;
+    margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+    .diagnosis-modal {
+        padding: 12px;
+    }
+
+    .diagnosis-modal-content {
+        padding: 20px;
+    }
+
+    .diagnosis-modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .diagnosis-modal-actions button {
+        width: 100%;
+    }
+}

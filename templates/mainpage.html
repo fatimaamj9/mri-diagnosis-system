@@ -1,0 +1,96 @@
+{% extends "doctor_base.html" %}
+
+{% block page_title %}Diagnose Patient{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='add_patient.css') }}"
+>
+{% endblock %}
+
+{% block page_content %}
+<main class="add-patient-page diagnosis-page">
+
+    <section class="add-patient-card diagnosis-patient-card">
+        <h1 class="add-patient-heading">Patient Diagnosis</h1>
+        <p class="add-patient-description">
+            Review the patient details and upload an image for analysis.
+        </p>
+
+        <div class="diagnosis-patient-details">
+            <div class="diagnosis-detail">
+                <span>Patient ID</span>
+                <strong>#{{ patient.id }}</strong>
+            </div>
+
+            <div class="diagnosis-detail">
+                <span>Patient Name</span>
+                <strong>{{ patient.fName }} {{ patient.lName }}</strong>
+            </div>
+
+            <div class="diagnosis-detail">
+                <span>Gender</span>
+                <strong>{{ patient.sex|capitalize }}</strong>
+            </div>
+
+            <div class="diagnosis-detail">
+                <span>Age</span>
+                <strong>{{ patient.pAge }} years</strong>
+            </div>
+
+            <div class="diagnosis-detail diagnosis-current">
+                <span>Current Diagnosis</span>
+                <strong>{{ patient.diagnosis }}</strong>
+            </div>
+        </div>
+    </section>
+
+    <section class="add-patient-card diagnosis-upload-card">
+        <h2 class="diagnosis-section-heading">Image Analysis</h2>
+        <p class="diagnosis-section-description">
+            Select an MRI image in PNG or JPG format to begin.
+        </p>
+
+        <form id="upload-file" method="post" enctype="multipart/form-data">
+            <label for="imageUpload" class="diagnosis-upload-area">
+                <span class="diagnosis-upload-icon" aria-hidden="true">↑</span>
+                <strong>Choose an image</strong>
+                <span>Click here to browse your files</span>
+                <small>Supported formats: PNG, JPG, JPEG</small>
+            </label>
+
+            <input
+                type="file"
+                name="file"
+                id="imageUpload"
+                accept=".png,.jpg,.jpeg,image/png,image/jpeg"
+                class="diagnosis-file-input"
+            >
+        </form>
+
+        <div class="image-section" style="display:none;">
+            <div class="img-preview">
+                <div id="imagePreview"></div>
+            </div>
+
+            <button type="button" class="add-patient-submit diagnosis-predict-button"
+                    id="btn-predict">
+                Predict
+            </button>
+        </div>
+
+        <div class="loader diagnosis-loader" style="display:none;"></div>
+
+        <div id="result" class="diagnosis-result" aria-live="polite">
+            <span></span>
+        </div>
+
+        <p class="diagnosis-disclaimer">
+            This model's output is a decision-support result and must be reviewed
+            by a qualified healthcare professional. It is not a confirmed diagnosis.
+        </p>
+    </section>
+
+</main>
+{% endblock %}

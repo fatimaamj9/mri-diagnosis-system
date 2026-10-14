@@ -1,0 +1,60 @@
+
+{% extends "doctor_base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_title %}Account{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='account.css') }}"
+>
+{% endblock %}
+
+{% block page_content %}
+<main class="account-page">
+    <section class="account-card">
+        <h1 class="account-heading">Edit Account Information</h1>
+        <p class="account-description">
+            Update your personal and account information below.
+        </p>
+
+        <form
+            class="account-form"
+            method="POST"
+            action=""
+        >
+            {{ form.hidden_tag() }}
+
+            {% for field in [
+                form.f_name,
+                form.l_name,
+                form.username,
+                form.ddbirth,
+                form.password,
+                form.confirm_password
+            ] %}
+                <div class="account-field">
+                    {{ field.label(class="account-label") }}
+
+                    {% if field.errors %}
+                        {{ field(class="form-control account-input is-invalid") }}
+
+                        <div class="account-errors">
+                            {% for error in field.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ field(class="form-control account-input") }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button class="account-submit" type="submit">
+                Update Account
+            </button>
+        </form>
+    </section>
+</main>
+{% endblock %}

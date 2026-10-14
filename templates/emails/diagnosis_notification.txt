@@ -1,0 +1,11 @@
+
+Dear {{ patient_name }},
+
+Your healthcare provider has prepared an update regarding your medical assessment.
+
+Reviewed result: {{ diagnosis }}
+
+Please contact your healthcare provider to discuss this result and its clinical interpretation. This notification is for informational purposes and is not a substitute for professional medical advice.
+
+Regards,
+Multiple Sclerosis Diagnostic System

@@ -1,0 +1,594 @@
+
+/* Add Patient page */
+html,
+body {
+    min-height: 100%;
+    height: auto;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+body {
+    background: #f4f7fb !important;
+    background-image: none !important;
+    color: #243247;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Full-width navy header */
+.add-patient-header {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 64px;
+    padding: 12px 28px;
+    box-sizing: border-box;
+    background: #17365D !important;
+    color: #fff;
+}
+
+.add-patient-header .add-patient-brand {
+    padding: 0;
+    color: #fff !important;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.add-patient-header #menuToggle {
+    top: 18px;
+    right: 22px;
+    padding: 0 !important;
+}
+
+.add-patient-header #menuToggle span {
+    background: #fff;
+}
+
+.add-patient-header #menuToggle input:checked ~ span {
+    background: #232323;
+}
+
+/* Main content */
+.add-patient-page {
+    width: 100%;
+    min-height: calc(100vh - 64px);
+    padding: 36px 20px 56px;
+    box-sizing: border-box;
+}
+
+.add-patient-card {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 34px 40px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(24, 49, 78, 0.07);
+}
+
+.add-patient-heading {
+    margin: 0 0 8px;
+    color: #17365D;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.add-patient-description {
+    margin: 0 0 30px;
+    color: #64748b;
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Form fields */
+.add-patient-form {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    color: #243247;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.add-patient-form .form-group {
+    margin-bottom: 20px;
+}
+
+.add-patient-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #344256;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.add-patient-form .form-control {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+    color: #243247;
+    font-size: 14px;
+    box-shadow: none;
+}
+
+.add-patient-form .form-control:focus {
+    border-color: #3975ad;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(57, 117, 173, 0.13);
+}
+
+/* Gender radio buttons */
+.add-patient-gender {
+    margin-bottom: 20px;
+}
+
+.add-patient-gender legend {
+    margin-bottom: 10px;
+    border: 0;
+    color: #344256;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.add-patient-gender .radio-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 22px 8px 0;
+    color: #334155;
+    font-weight: 400;
+}
+
+.add-patient-gender input {
+    margin: 0;
+}
+
+/* Submit button */
+.add-patient-submit {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 10px;
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 8px;
+    background: #17365D;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.add-patient-submit:hover {
+    background: #244c78;
+}
+
+/* Validation and flash messages */
+.add-patient-errors {
+    margin: 6px 0 0;
+    padding-left: 18px;
+    color: #b42318;
+    font-size: 13px;
+}
+
+.add-patient-flashes {
+    max-width: 680px;
+    margin: 0 auto 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.add-patient-flashes li {
+    margin-bottom: 8px;
+    padding: 12px 16px;
+    border: 1px solid #f0caca;
+    border-radius: 8px;
+    background: #fff1f0;
+    color: #a11b1b;
+}
+
+@media (max-width: 600px) {
+    .add-patient-header {
+        padding: 12px 16px;
+    }
+
+    .add-patient-header .add-patient-brand {
+        max-width: 80%;
+        font-size: 15px;
+        line-height: 1.4;
+    }
+
+    .add-patient-page {
+        padding: 22px 12px 36px;
+    }
+
+    .add-patient-card {
+        padding: 26px 20px;
+        border-radius: 10px;
+    }
+
+    .add-patient-heading {
+        font-size: 24px;
+    }
+}
+/* Shared form layout for Add Patient and Update Patient */
+
+.add-patient-form .update-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 24px;
+}
+
+.add-patient-form .update-form-grid .form-group {
+    min-width: 0;
+}
+
+.add-patient-form .update-form-grid .full-width {
+    grid-column: 1 / -1;
+}
+
+/* Update page action buttons */
+
+.update-patient-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.update-patient-actions .add-patient-submit {
+    flex: 1;
+    width: auto;
+    margin-top: 0;
+}
+
+.update-patient-cancel {
+    display: inline-flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 18px;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+    color: #17365D;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.update-patient-cancel:hover {
+    background: #f4f7fb;
+    color: #17365D;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .add-patient-form .update-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .add-patient-form .update-form-grid .full-width {
+        grid-column: auto;
+    }
+
+    .update-patient-actions {
+        flex-direction: column;
+    }
+}
+.add-patient-flashes li.success {
+    border-color: #b7e4c7;
+    background: #d8f3dc;
+    color: #1b5e20;
+}
+
+.add-patient-flashes li.danger,
+.add-patient-flashes li.error {
+    border-color: #f0caca;
+    background: #fff1f0;
+    color: #a11b1b;
+}
+/* Diagnosis page */
+
+.diagnosis-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.diagnosis-patient-card,
+.diagnosis-upload-card {
+    max-width: 900px;
+    width: 100%;
+}
+
+.diagnosis-patient-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.diagnosis-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+    overflow-wrap: anywhere;
+}
+
+.diagnosis-detail span {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.diagnosis-detail strong {
+    color: #17365D;
+    font-size: 15px;
+}
+
+.diagnosis-current {
+    grid-column: 1 / -1;
+    border-left: 4px solid #17365D;
+}
+
+.diagnosis-section-heading {
+    margin: 0 0 8px;
+    color: #17365D;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.diagnosis-section-description {
+    margin: 0 0 24px;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.diagnosis-upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 30px 20px;
+    border: 2px dashed #b8c8da;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #17365D;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.diagnosis-upload-area:hover {
+    border-color: #3975ad;
+    background: #eef5fc;
+}
+
+.diagnosis-upload-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #e4edf7;
+    color: #17365D;
+    font-size: 28px;
+}
+
+.diagnosis-upload-area strong {
+    font-size: 16px;
+}
+
+.diagnosis-upload-area span:not(.diagnosis-upload-icon) {
+    color: #475569;
+    font-size: 14px;
+}
+
+.diagnosis-upload-area small {
+    color: #64748b;
+    font-size: 12px;
+}
+
+/* Keep the input available to the existing JavaScript */
+.diagnosis-file-input {
+    display: block;
+    width: 100%;
+    margin: 12px 0 20px;
+    color: #475569;
+    font-size: 13px;
+}
+
+.diagnosis-upload-card .image-section {
+    margin-top: 24px;
+}
+
+.diagnosis-upload-card .img-preview {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.diagnosis-upload-card #imagePreview img {
+    display: block;
+    max-width: 100%;
+    max-height: 380px;
+    height: auto;
+    margin: 0 auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+.diagnosis-predict-button {
+    display: block;
+    width: 100%;
+    max-width: 260px;
+    margin: 20px auto 0;
+}
+
+.diagnosis-loader {
+    margin: 24px auto;
+}
+
+.diagnosis-result {
+    margin-top: 20px;
+    color: #17365D;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.diagnosis-disclaimer {
+    margin: 24px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+    .diagnosis-patient-details {
+        grid-template-columns: 1fr;
+    }
+
+    .diagnosis-current {
+        grid-column: auto;
+    }
+
+    .diagnosis-upload-area {
+        padding: 24px 14px;
+    }
+
+    .diagnosis-upload-card #imagePreview img {
+        max-height: 280px;
+    }
+}
+/* Improved navigation dropdown */
+
+.add-patient-header {
+    min-height: 68px;
+    padding: 12px 28px;
+}
+
+.add-patient-header #menuToggle {
+    top: 20px;
+    right: 28px;
+    z-index: 1000;
+}
+
+/* Dropdown panel */
+.add-patient-header #menuToggle #menu {
+    position: absolute;
+    top: 30px;
+    right: -10px;
+    width: 250px !important;
+    min-height: 0;
+    height: auto !important;
+    margin: 0;
+    padding: 12px !important;
+    box-sizing: border-box;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(15, 35, 60, 0.20);
+    list-style: none;
+    text-align: left;
+    transform: translate(110%, 0);
+    transition: transform 0.25s ease;
+}
+
+/* Show dropdown when the hamburger is checked */
+.add-patient-header #menuToggle input:checked ~ #menu {
+    transform: translate(0, 0);
+}
+
+/* Navigation links */
+.add-patient-header #menuToggle #menu a {
+    display: block;
+    padding: 0 !important;
+    color: #17365D !important;
+    text-decoration: none;
+    border-radius: 7px;
+}
+
+.add-patient-header #menuToggle #menu li {
+    padding: 13px 14px;
+    font-size: 15px;
+    line-height: 1.4;
+    list-style: none;
+}
+
+.add-patient-header #menuToggle #menu a:hover {
+    background: #eef4fa;
+    color: #17365D !important;
+}
+
+/* Keep the menu above the page content */
+.add-patient-header #menuToggle input {
+    z-index: 1002;
+}
+
+.add-patient-header #menuToggle span {
+    z-index: 1001;
+}
+
+@media (max-width: 600px) {
+    .add-patient-header {
+        padding: 12px 16px;
+    }
+
+    .add-patient-header #menuToggle {
+        right: 18px;
+    }
+
+    .add-patient-header #menuToggle #menu {
+        width: 230px !important;
+        right: -8px;
+    }
+}
+.diagnosis-upload-card input[type="file"].diagnosis-file-input {
+    display: none !important;
+}
+
+.loader {
+    width: 42px;
+    height: 42px;
+    margin: 20px auto;
+    border: 5px solid #e1e8f0;
+    border-top-color: #245b91;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#imagePreview {
+    width: 100%;
+    min-height: 300px;
+}
