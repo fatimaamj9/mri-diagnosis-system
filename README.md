@@ -46,6 +46,63 @@ Do not commit real patient images, identifiable medical information, credentials
 
 Any images used for demonstration should be authorized for reuse and de-identified. Model predictions are experimental and should not be interpreted as confirmed medical diagnoses.
 
+## Running Locally
+
+### Prerequisites
+
+- Python
+- Git
+- The trained model file, obtained separately
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/fatimaamj9/mri-diagnosis-system.git
+cd mri-diagnosis-system
+```
+
+### 2. Create and activate a virtual environment
+
+**Windows (PowerShell):**
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure environment variables
+
+Copy `.env.example` to `.env` and update the values with your own configuration. Never commit secret keys, email passwords, or other credentials to GitHub.
+
+### 5. Add the trained model
+
+Obtain the trained model separately and place it at:
+
+`models/MSStrokeModelBestt.h5`
+
+The model file is not included in this repository because of its large size.
+
+### 6. Start the application
+
+For local development, run:
+
+```bash
+python app.py
+```
+
+For a deployment environment using Gunicorn, the configured command is:
+
+```bash
+gunicorn app:app
+```
+
+
 ## Future Improvements
 
 - Add automated tests for authentication, patient management, and prediction workflows.
